@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
+import 'package:flame/geometry.dart';
+import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:warioddly/components/universe.dart';
@@ -42,7 +45,7 @@ class MovablePlayer extends Player<DinoGame> with CollisionCallbacks, KeyboardHa
 
   MovablePlayer() : super(priority: 2);
 
-  static const double speed = 300;
+  static const double speed = 200;
   static final TextPaint textRenderer = TextPaint(style: const TextStyle(color: Colors.white, fontSize: 12));
 
   final Vector2 velocity = Vector2.zero();
@@ -50,6 +53,7 @@ class MovablePlayer extends Player<DinoGame> with CollisionCallbacks, KeyboardHa
   late final Vector2 textPosition;
   late final maxPosition = Vector2.all(Universe.size - size.x / 2);
   late final minPosition = -maxPosition;
+
 
 
   @override
@@ -72,7 +76,6 @@ class MovablePlayer extends Player<DinoGame> with CollisionCallbacks, KeyboardHa
     position.clamp(minPosition, maxPosition);
     positionText.text = '(${x.toInt()}, ${y.toInt()})';
   }
-
 
 
   @override
@@ -107,3 +110,5 @@ class MovablePlayer extends Player<DinoGame> with CollisionCallbacks, KeyboardHa
 
 
 }
+
+

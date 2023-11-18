@@ -15,14 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Warioddly Portfolio',
-      home: SafeArea(
-        child: GameWidget.controlled(
-          gameFactory: () => DinoGame(
-            viewportResolution: Vector2(
-              500, 500
-              // context.numberProperty('viewport width', 500),
-              // context.numberProperty('viewport height', 500),
-            ),
+      home: GameWidget.controlled(
+        gameFactory: () => DinoGame(
+          viewportResolution: Vector2(
+            MediaQuery.of(context).size.width,
+            MediaQuery.of(context).size.height,
+            // context.numberProperty('viewport width', 500),
+            // context.numberProperty('viewport height', 500),
           ),
         ),
       )
