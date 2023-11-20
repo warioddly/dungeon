@@ -1,21 +1,39 @@
+
 import 'dart:math';
-import 'package:bonfire/mixins/direction_animation.dart';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:warioddly/characters/player.dart';
-import 'package:warioddly/constants/universe.dart';
+import 'package:warioddly/characters/dino.dart';
+import 'package:warioddly/decorates/items/flashlight.dart';
 import 'package:warioddly/decorates/texts/animated_text_box.dart';
 import 'package:warioddly/game.dart';
+import 'package:warioddly/utils/configs/light.dart';
+import 'package:warioddly/utils/constants/universe.dart';
 
 
-class MyWorld extends World with HasCollisionDetection, HasGameRef<AdventureGame> {
+class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetection {
 
   MyWorld();
 
-  Player get player => gameRef.player;
+  Vector2 origin = Vector2.zero();
+  Paint paint = Paint();
+  bool isOriginCasted = false;
+  Gradient gradient = RadialGradient(
+    colors: [
+      Colors.black,
+      Colors.orange.withOpacity(0.4),
+      Colors.orange.withOpacity(0.5),
+      Colors.black,
+    ],
+    stops: const [0.0, 0.1, 0.3, 4.0],
+  );
+  double timePassed = 0.0;
+  final List<Ray2> rays = [];
+  final List<RaycastResult<ShapeHitbox>> results = [];
+
 
   @override
   Future<void> onLoad() async {
@@ -27,20 +45,7 @@ class MyWorld extends World with HasCollisionDetection, HasGameRef<AdventureGame
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
 
-    origin = player.absoluteCenter;
-
     addAll([
-
-      // SimpleEnemy(
-      //   position: Vector2(100, 100),
-      //   size: Vector2.all(50),
-      //   animation: SimpleDirectionAnimation(
-      //     idleLeft:  gameRef.loadSpriteAnimation(path, data)
-      //     idleRight: await gameRef.loadSprite('dino.png'),
-      //     runLeft: await gameRef.loadSprite('dino.png'),
-      //     runRight: await gameRef.loadSprite('dino.png'),
-      //   ),
-      // ),
 
       AnimatedTextBox(
           '''"Hi there! Welcome to my Portfolio.
@@ -71,6 +76,7 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
           ]
       ),
       RectangleComponent(
+        priority: 2,
         position: Vector2.all(300),
         size: Vector2.all(100),
         paint: paint,
@@ -94,36 +100,20 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
   }
 
 
-  Vector2 origin = Vector2.zero();
-  Paint paint = Paint();
-  bool isOriginCasted = false;
-  Gradient gradient = RadialGradient(
-    colors: [
-      Colors.black,
-      Colors.orange.withOpacity(0.4),
-      Colors.orange.withOpacity(0.5),
-      Colors.black,
-    ],
-    stops: const [0.0, 0.1, 0.3, 4.0],
-  );
-  double _timePassed = 0.0;
-  final List<Ray2> rays = [];
-  final List<RaycastResult<ShapeHitbox>> results = [];
-
 
   @override
   void update(double dt) {
     super.update(dt);
 
-    final origin = player.absoluteCenter;
+    final origin = gameRef.player.absolutePosition;
     isOriginCasted = origin == this.origin;
     this.origin = origin;
 
-    _timePassed += dt;
+    timePassed += dt;
 
     paint.shader = gradient.createShader(Rect.fromCircle(
       center: origin.toOffset(),
-      radius: 300 + sin(_timePassed * 15) * 30,
+      radius: 300 + sin(timePassed * LightConfig().pulseSpeed) * 15,
     ));
 
     if (!isOriginCasted) {
@@ -134,9 +124,9 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
       collisionDetection.raycastAll(
         origin,
         numberOfRays: Universe.numberOfRays,
-        // maxDistance: Universe.rayMaxDistance,
         rays: rays,
         out: results,
+        maxDistance: Universe.rayMaxDistance,
         // startAngle: angle + angleDelta,
         // sweepAngle: -angleDelta,
       );
@@ -152,7 +142,6 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
     super.render(canvas);
     renderResult(canvas, origin, results, paint);
   }
-
 
   void renderResult(Canvas canvas, Vector2 origin, List<RaycastResult<ShapeHitbox>> results, Paint paint) {
 
@@ -171,46 +160,3 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
 
 
 }
-
-//
-//
-// class Enemy extends Npc with Attackable {
-//   Enemy({
-//     required Vector2 position,
-//     required Vector2 size,
-//     double life = 10,
-//     double speed = 100,
-//     ReceivesAttackFromEnum receivesAttackFrom =
-//         ReceivesAttackFromEnum.PLAYER_AND_ALLY,
-//   }) : super(position: position, size: size, speed: speed) {
-//     this.speed = speed;
-//     this.receivesAttackFrom = receivesAttackFrom;
-//     initialLife(life);
-//     this.position = position;
-//     this.size = size;
-//   }
-// }
-//
-// class SimpleEnemy extends Enemy with DirectionAnimation {
-//   SimpleEnemy({
-//     required Vector2 position,
-//     required Vector2 size,
-//     required SimpleDirectionAnimation animation,
-//     double life = 100,
-//     double speed = 100,
-//     Direction initDirection = Direction.right,
-//     ReceivesAttackFromEnum receivesAttackFrom =
-//         ReceivesAttackFromEnum.PLAYER_AND_ALLY,
-//   }) : super(
-//     position: position,
-//     size: size,
-//     life: life,
-//     speed: speed,
-//     receivesAttackFrom: receivesAttackFrom,
-//   ) {
-//     this.animation = animation;
-//     lastDirection = initDirection;
-//     lastDirectionHorizontal =
-//     initDirection == Direction.left ? Direction.left : Direction.right;
-//   }
-// }

@@ -1,7 +1,7 @@
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:warioddly/constants/text.dart';
+import 'package:warioddly/utils/constants/text.dart';
 
 
 
