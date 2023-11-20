@@ -1,12 +1,18 @@
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:warioddly/game.dart';
 
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
-  await Flame.device.fullScreen();
+  if (!kIsWeb) {
+    await Flame.device.setLandscape();
+    await Flame.device.fullScreen();
+  }
+
   runApp(GameWidget(
     game: AdventureGame(
       viewportResolution: Vector2(
@@ -19,14 +25,3 @@ void main() async {
   ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Warioddly Portfolio',
-      home: Container(),
-    );
-  }
-}

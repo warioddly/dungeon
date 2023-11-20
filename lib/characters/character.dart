@@ -1,11 +1,14 @@
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
+import 'package:warioddly/decorations/items/light/light.dart';
 import 'package:warioddly/utils/constants/universe.dart';
+import 'package:warioddly/worlds/my_world.dart';
 
 
-class Character<T extends FlameGame> extends SpriteComponent with HasGameReference<T>, KeyboardHandler {
+class Character<T extends FlameGame> extends SpriteComponent with HasGameReference<T>, KeyboardHandler, CollisionCallbacks {
 
   Character({
     super.position,
@@ -25,45 +28,12 @@ class Character<T extends FlameGame> extends SpriteComponent with HasGameReferen
   late final maxPosition = Vector2.all(Universe.size - size.x / 2);
   late final minPosition = -maxPosition;
 
-
-  @override
-  void update(double dt) {
-    super.update(dt);
-    final deltaPosition = velocity * (Universe.playerSpeed * dt);
-    position.add(deltaPosition);
-    position.clamp(minPosition, maxPosition);
-
-  }
+  Light? light;
 
 
-  @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-
-    final isKeyDown = event is RawKeyDownEvent;
-
-    final bool handled;
-    if (event.logicalKey == LogicalKeyboardKey.keyA) {
-      velocity.x = isKeyDown ? -1 : 0;
-      handled = true;
-    } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
-      velocity.x = isKeyDown ? 1 : 0;
-      handled = true;
-    } else if (event.logicalKey == LogicalKeyboardKey.keyW) {
-      velocity.y = isKeyDown ? -1 : 0;
-      handled = true;
-    } else if (event.logicalKey == LogicalKeyboardKey.keyS) {
-      velocity.y = isKeyDown ? 1 : 0;
-      handled = true;
-    } else {
-      handled = false;
-    }
-
-    if (handled) {
-      angle = -velocity.angleToSigned(Vector2(1, -1));
-      return false;
-    }
-
-    return super.onKeyEvent(event, keysPressed);
+  void addLight(Light light) {
+    this.light = light
+      ..character = this;
   }
 
 

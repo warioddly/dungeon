@@ -19,5 +19,7 @@ class LightConfig {
 
   double radius = 350;
 
+  int numberOfRays = 300;
+
 
 }

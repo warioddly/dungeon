@@ -1,44 +1,29 @@
 
-import 'dart:math';
+import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/geometry.dart';
+import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:warioddly/characters/dino.dart';
-import 'package:warioddly/decorates/items/flashlight.dart';
-import 'package:warioddly/decorates/texts/animated_text_box.dart';
+import 'package:warioddly/characters/draggable_dino.dart';
+import 'package:warioddly/decorations/items/light/torch.dart';
+import 'package:warioddly/decorations/texts/animated_text_box.dart';
 import 'package:warioddly/game.dart';
-import 'package:warioddly/utils/configs/light.dart';
-import 'package:warioddly/utils/constants/universe.dart';
+
+import '../characters/dino.dart';
 
 
 class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetection {
 
   MyWorld();
 
-  Vector2 origin = Vector2.zero();
-  Paint paint = Paint();
-  bool isOriginCasted = false;
-  Gradient gradient = RadialGradient(
-    colors: [
-      Colors.black,
-      Colors.orange.withOpacity(0.4),
-      Colors.orange.withOpacity(0.5),
-      Colors.black,
-    ],
-    stops: const [0.0, 0.1, 0.3, 4.0],
-  );
-  double timePassed = 0.0;
-  final List<Ray2> rays = [];
-  final List<RaycastResult<ShapeHitbox>> results = [];
 
+  DragDino pla = DragDino();
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
-
     debugMode = false;
 
     final paint = BasicPalette.gray.paint()
@@ -46,7 +31,7 @@ class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetectio
       ..strokeWidth = 2.0;
 
     addAll([
-
+      ScreenHitbox(),
       AnimatedTextBox(
           '''"Hi there! Welcome to my Portfolio.
 
@@ -59,12 +44,6 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
         ..anchor = Anchor.center
         ..y = -220,
 
-      CircleComponent(
-        position: Vector2(100, 100),
-        radius: 50,
-        paint: paint,
-        children: [CircleHitbox()],
-      ),
       CircleComponent(
           position: Vector2(150, 500),
           radius: 50,
@@ -97,66 +76,29 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
 
     ]);
 
-  }
+    gameRef.player.addLight(TorchLight(collisionDetection));
 
+    pla.addLight(TorchLight(collisionDetection));
+
+    add(pla);
+
+  }
 
 
   @override
   void update(double dt) {
     super.update(dt);
-
-    final origin = gameRef.player.absolutePosition;
-    isOriginCasted = origin == this.origin;
-    this.origin = origin;
-
-    timePassed += dt;
-
-    paint.shader = gradient.createShader(Rect.fromCircle(
-      center: origin.toOffset(),
-      radius: 300 + sin(timePassed * LightConfig().pulseSpeed) * 15,
-    ));
-
-    if (!isOriginCasted) {
-
-      // double angle = player.angle;
-      // double angleDelta = 3.14159 / 3;
-
-      collisionDetection.raycastAll(
-        origin,
-        numberOfRays: Universe.numberOfRays,
-        rays: rays,
-        out: results,
-        maxDistance: Universe.rayMaxDistance,
-        // startAngle: angle + angleDelta,
-        // sweepAngle: -angleDelta,
-      );
-
-      isOriginCasted = true;
-    }
-
+    gameRef.player.light?.update(dt);
+    pla.light?.update(dt);
   }
 
 
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    renderResult(canvas, origin, results, paint);
+    gameRef.player.light?.render(canvas);
+    pla.light?.render(canvas);
   }
-
-  void renderResult(Canvas canvas, Vector2 origin, List<RaycastResult<ShapeHitbox>> results, Paint paint) {
-
-    final originOffset = origin.toOffset();
-
-    for (final result in results) {
-
-      if (!result.isActive) continue;
-
-      canvas.drawLine(originOffset, result.intersectionPoint!.toOffset(), paint);
-
-    }
-
-  }
-
 
 
 }

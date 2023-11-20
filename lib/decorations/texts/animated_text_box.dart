@@ -1,4 +1,5 @@
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:warioddly/utils/constants/text.dart';
@@ -26,6 +27,9 @@ class AnimatedTextBox extends TextBoxComponent {
       growingBox: true,
       margins: EdgeInsets.all(margins ?? 25),
     ),
+    children: [
+      RectangleHitbox()
+    ],
   );
 
   @override
