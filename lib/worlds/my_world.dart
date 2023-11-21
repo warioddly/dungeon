@@ -20,6 +20,7 @@ class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetectio
 
 
   DragDino pla = DragDino();
+  Dino player = Dino();
 
   @override
   Future<void> onLoad() async {
@@ -29,6 +30,8 @@ class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetectio
     final paint = BasicPalette.gray.paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
+
+    add(player);
 
     addAll([
       ScreenHitbox(),
@@ -76,7 +79,7 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
 
     ]);
 
-    gameRef.player.addLight(TorchLight(collisionDetection));
+    player.addLight(TorchLight(collisionDetection));
 
     pla.addLight(TorchLight(collisionDetection));
 
@@ -88,7 +91,7 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
   @override
   void update(double dt) {
     super.update(dt);
-    gameRef.player.light?.update(dt);
+    player.light?.update(dt);
     pla.light?.update(dt);
   }
 
@@ -96,7 +99,7 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    gameRef.player.light?.render(canvas);
+    player.light?.render(canvas);
     pla.light?.render(canvas);
   }
 

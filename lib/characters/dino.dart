@@ -3,14 +3,10 @@
 import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:warioddly/characters/character.dart';
-import 'package:warioddly/decorations/items/light/light.dart';
-import 'package:warioddly/decorations/items/light/torch.dart';
 import 'package:warioddly/game.dart';
 import 'package:warioddly/utils/constants/universe.dart';
-import 'package:warioddly/worlds/my_world.dart';
 
 
 class Dino extends Character<AdventureGame> with HasGameRef<AdventureGame>, CollisionPassthrough {
@@ -64,7 +60,6 @@ class Dino extends Character<AdventureGame> with HasGameRef<AdventureGame>, Coll
 
     return super.onKeyEvent(event, keysPressed);
   }
-
 
 
 
