@@ -27,9 +27,7 @@ class AnimatedTextBox extends TextBoxComponent {
       growingBox: true,
       margins: EdgeInsets.all(margins ?? 25),
     ),
-    children: [
-      RectangleHitbox()
-    ],
+    children: [ RectangleHitbox() ],
   );
 
   @override

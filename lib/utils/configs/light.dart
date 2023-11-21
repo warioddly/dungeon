@@ -1,25 +1,58 @@
 
 
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:warioddly/decorations/items/light/light.dart';
 
-
-
-import 'dart:ui';
 
 class LightConfig {
 
-  LightConfig();
+  LightConfig({
+    this.color = const Color(0xFFFFFFFF),
+    this.gradient,
+    this.type = LightType.radial,
+    this.pulseSpeed = 1.0,
+    this.maxPulseRadius = 350.0,
+    this.radius = 320.0,
+    this.numberOfRays = 100,
+  });
 
-  Color color = const Color(0x88FFFFFF);
 
-  double pulseSpeed = 5;
+  final Color color;
 
-  double maxPulseRadius = 350;
+  final double maxPulseRadius;
 
-  double minPulseRadius = 350;
+  final double radius;
 
-  double radius = 350;
+  final int numberOfRays;
 
-  int numberOfRays = 300;
+  final Gradient? gradient;
+
+  final LightType type;
+
+  double pulseSpeed;
+
+
+  copyWith({
+    Color? color,
+    Gradient? gradient,
+    double? pulseSpeed,
+    double? maxPulseRadius,
+    double? minPulseRadius,
+    double? radius,
+    LightType? type,
+    int? numberOfRays,
+  }) {
+    return LightConfig(
+      color: color ?? this.color,
+      gradient: gradient ?? this.gradient,
+      pulseSpeed: pulseSpeed ?? this.pulseSpeed,
+      type: type ?? this.type,
+      maxPulseRadius: maxPulseRadius ?? this.maxPulseRadius,
+      radius: radius ?? this.radius,
+      numberOfRays: numberOfRays ?? this.numberOfRays,
+    );
+  }
 
 
 }

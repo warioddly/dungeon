@@ -7,20 +7,22 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:warioddly/characters/draggable_dino.dart';
-import 'package:warioddly/decorations/items/light/torch.dart';
+import 'package:warioddly/decorations/items/light/light.dart';
 import 'package:warioddly/decorations/texts/animated_text_box.dart';
 import 'package:warioddly/game.dart';
-
+import 'package:warioddly/utils/configs/light.dart';
 import '../characters/dino.dart';
+import '../utils/mixins/component_light_mixin.dart';
 
 
-class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetection {
+class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetection, HasCharacterLighting<AdventureGame> {
 
   MyWorld();
 
 
   DragDino pla = DragDino();
   Dino player = Dino();
+
 
   @override
   Future<void> onLoad() async {
@@ -31,7 +33,10 @@ class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetectio
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
 
-    add(player);
+    addAll([
+      player,
+      pla,
+    ]);
 
     addAll([
       ScreenHitbox(),
@@ -79,29 +84,22 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
 
     ]);
 
-    player.addLight(TorchLight(collisionDetection));
+    addLight(player, LightConfig(
+      radius: 320,
+      color: Colors.red,
+      type: LightType.torch,
+    ));
 
-    pla.addLight(TorchLight(collisionDetection));
-
-    add(pla);
+    addLight(pla, LightConfig(
+      radius: 250,
+      color: Colors.red,
+    ));
 
   }
 
-
-  @override
-  void update(double dt) {
-    super.update(dt);
-    player.light?.update(dt);
-    pla.light?.update(dt);
-  }
-
-
-  @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-    player.light?.render(canvas);
-    pla.light?.render(canvas);
-  }
 
 
 }
+
+
+

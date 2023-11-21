@@ -21,7 +21,7 @@ class AdventureGame extends FlameGame with HasKeyboardHandlerComponents {
   Future<void> onLoad() async {
     super.onLoad();
 
-    await images.load('player/dino.png');
+    await images.load('characters/dino.png');
     add(FpsTextComponent(position: Vector2(10, 10)));
 
     camera.follow((world as MyWorld).player, maxSpeed: Universe.cameraSpeed);

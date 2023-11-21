@@ -18,7 +18,7 @@ class Dino extends Character<AdventureGame> with HasGameRef<AdventureGame>, Coll
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    sprite = await game.loadSprite('player/dino.png');
+    sprite = await game.loadSprite('characters/dino.png');
   }
 
 
