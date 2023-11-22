@@ -87,8 +87,8 @@ Thanks for stopping by, and I hope you enjoy your visit!"''',
 
 
 
-    // addLight(player, player.lightConfig);
-    // addLight(wizard, wizard.lightConfig);
+    addLight(player, player.lightConfig);
+    addLight(wizard, wizard.lightConfig);
 
     wizard
       ..add(TextBoxComponent(
