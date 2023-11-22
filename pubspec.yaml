@@ -64,6 +64,7 @@ flutter:
    - assets/images/
    - assets/images/pets/
    - assets/images/characters/
+   - assets/images/characters/wizard/
    - assets/images/items/
 #   - images/a_dot_ham.jpeg
 

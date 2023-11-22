@@ -16,8 +16,16 @@ class DragDino extends Character<AdventureGame> with HasGameRef<AdventureGame>, 
 
   @override
   Future<void> onLoad() async {
-    super.onLoad();
-    sprite = await game.loadSprite('characters/dino.png');
+    await super.onLoad();
+    // animation = SpriteAnimation.fromFrameData(
+    //   game.images.fromCache('characters/wizard/Idle.png'),
+    //   SpriteAnimationData.sequenced(
+    //     amount: 8,
+    //     stepTime: 0.1,
+    //     textureSize: Vector2.all(32),
+    //   ),
+    // );
+
   }
 
   @override

@@ -21,9 +21,9 @@ class Torchlight extends RadialLight {
 
     if (config?.gradient == null) {
       this.config = config?.copyWith(
-        gradient: const RadialGradient(
-          colors: [Colors.yellow, Colors.orange, Colors.red, Colors.transparent],
-          stops: [0.0, 0.5, 0.8, 1.0],
+        gradient: RadialGradient(
+          colors: [Colors.yellow, Colors.orange, Colors.red.withOpacity(0.6), Colors.transparent],
+          stops: const [0.0, 0.5, 0.8, 1.0],
         )
       );
     }
