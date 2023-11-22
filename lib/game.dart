@@ -25,6 +25,10 @@ class AdventureGame extends FlameGame with HasKeyboardHandlerComponents {
       '/characters/dino.png',
       '/characters/wizard/Idle.png',
       '/characters/wizard/Run.png',
+      '/characters/wizard/Attack1.png',
+      '/characters/wizard/Attack2.png',
+
+      '/characters/ghost/idle.png',
     ]);
 
     add(FpsTextComponent(position: Vector2(10, 10)));
