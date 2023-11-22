@@ -13,6 +13,8 @@ jobs:
   dependencies:
     name: Install Dependencies
     runs-on: ubuntu-latest
+    env:
+      my_secret: ${{secrets.commit_secret}}
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
@@ -20,13 +22,6 @@ jobs:
           flutter-version: "3.13.9"
           channel: 'stable'
           cache: true // 2
-          
-  build: 
-    name: Build Portfolio
-    runs-on: ubuntu-latest
-    env:
-      my_secret: ${{secrets.commit_secret}}
-    steps:
       - run: flutter config --enable-web
       - run: flutter pub get
       - name: "Run Flutter build"
