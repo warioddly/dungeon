@@ -34,7 +34,9 @@ class AdventureGame extends FlameGame with HasKeyboardHandlerComponents {
 
     add(FpsTextComponent(position: Vector2(10, 10)));
 
-    camera.follow((world as MyWorld).player, maxSpeed: Universe.cameraSpeed);
+    camera
+      ..viewfinder.zoom = 1.5
+      ..follow((world as MyWorld).player, maxSpeed: Universe.cameraSpeed);
 
   }
 

@@ -2,23 +2,25 @@
 import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:warioddly/characters/ghost.dart';
 import 'package:warioddly/characters/wizard.dart';
+import 'package:warioddly/decorations/blocks/clickable_box.dart';
 import 'package:warioddly/decorations/texts/animated_text_box.dart';
 import 'package:warioddly/game.dart';
 import 'package:warioddly/utils/configs/text.dart';
 import '../utils/mixins/component_light_mixin.dart';
 
 
-class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetection, HasCharacterLighting<AdventureGame> {
+class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetection, HasCharacterLighting<AdventureGame>, TapCallbacks {
 
   MyWorld();
 
 
   Wizard wizard = Wizard(handleKeyboardEvents: false);
-  Ghost player = Ghost(priority: 2, handleKeyboardEvents: true);
+  Ghost player = Ghost(priority: 2, handleKeyboardEvents: true)..position = Vector2(0, 0.01);
 
 
   @override
@@ -43,7 +45,8 @@ I'm IMØ, and I'm passionate about web/mobile development. Here, you'll find a c
 
 Feel free to explore and get to know more about my journey. If you have any questions or if there's something specific you're looking for, don't hesitate to reach out.
           
-Thanks for stopping by, and I hope you enjoy your visit!"'''
+Thanks for stopping by, and I hope you enjoy your visit!"''',
+        size: Vector2(450, 300)
       )
         ..anchor = Anchor.center
         ..y = -220,
@@ -78,11 +81,14 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
         children: [RectangleHitbox()],
       ),
 
+    TouchableComponent(),
+      MyShapeComponent(hitbox: CircleHitbox()),
     ]);
 
 
-    addLight(player, player.lightConfig);
-    addLight(wizard, wizard.lightConfig);
+
+    // addLight(player, player.lightConfig);
+    // addLight(wizard, wizard.lightConfig);
 
     wizard
       ..add(TextBoxComponent(

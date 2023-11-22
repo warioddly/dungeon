@@ -81,9 +81,8 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-   - family: PressStart2P
+   - family: VT323
      fonts:
-       - asset: assets/fonts/press_start_2P.ttf
        - asset: assets/fonts/VT323-Regular.ttf
   #   - family: Trajan Pro
   #     fonts:

@@ -20,7 +20,6 @@ enum CharacterState {
   attack2,
   skill,
 
-
 }
 
 class Character<T extends FlameGame> extends SpriteAnimationComponent with HasGameReference<T>, KeyboardHandler, CollisionCallbacks {
@@ -139,7 +138,7 @@ class Character<T extends FlameGame> extends SpriteAnimationComponent with HasGa
   }
 
 
-  void infinityRandomMovement() {
+  void infinityRandomMovement([Path? path, EffectController? controller]) {
 
     Future.delayed(const Duration(milliseconds: 100), () {
       character.current = CharacterState.running;
@@ -147,12 +146,12 @@ class Character<T extends FlameGame> extends SpriteAnimationComponent with HasGa
 
     add(
       MoveAlongPathEffect(
-        Path()
+        path ?? Path()
           ..moveTo(100, 0)
           ..lineTo(200, 100)
           ..lineTo(400, 100)
-          ..lineTo(550, 550),
-        EffectController(
+          ..lineTo(550, 500),
+        controller ?? EffectController(
           duration: 15,
           reverseDuration: 15,
           infinite: true,
