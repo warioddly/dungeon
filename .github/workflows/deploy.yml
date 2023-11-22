@@ -43,7 +43,7 @@ jobs:
           git config --global user.email ${{ env.EMAIL }}
           git config --global user.name ${{ env.USERNAME }}
           git config --global init.defaultBranch main
-          git remote add origin https://oauth2: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@github.com/warioddly/portfolio.git
+          git remote add origin https://oauth2:${{ env.ACCESS_TOKEN }}@github.com/warioddly/portfolio.git
           git checkout -b gh-pages
           git add .
           git commit -m "update"
