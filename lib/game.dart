@@ -22,13 +22,14 @@ class AdventureGame extends FlameGame with HasKeyboardHandlerComponents {
     super.onLoad();
 
     await images.loadAll([
-      '/characters/dino.png',
+
       '/characters/wizard/Idle.png',
       '/characters/wizard/Run.png',
       '/characters/wizard/Attack1.png',
       '/characters/wizard/Attack2.png',
 
       '/characters/ghost/idle.png',
+      '/characters/ghost/attacking.png',
     ]);
 
     add(FpsTextComponent(position: Vector2(10, 10)));

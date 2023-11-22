@@ -2,7 +2,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:warioddly/utils/constants/text.dart';
+import 'package:warioddly/utils/configs/text.dart';
 
 
 
@@ -16,13 +16,9 @@ class AnimatedTextBox extends TextBoxComponent {
       double? margins,
   }) : super(
     text: text,
-    textRenderer: TextConstants.regular.copyWith((style) => style.copyWith(
-      color: Colors.lightGreenAccent,
-      fontFamily: 'monospace',
-      letterSpacing: 2.0,
-    )),
+    textRenderer: TextConfig.renderer,
     boxConfig: TextBoxConfig(
-      maxWidth: 550,
+      maxWidth: 450,
       timePerChar: timePerChar ?? 0.03,
       growingBox: true,
       margins: EdgeInsets.all(margins ?? 25),

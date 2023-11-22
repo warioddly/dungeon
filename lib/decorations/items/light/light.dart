@@ -7,11 +7,9 @@ import 'package:warioddly/utils/configs/light.dart';
 
 
 enum LightType {
-
   radial,
   torch,
   angle,
-
 }
 
 
@@ -27,8 +25,6 @@ abstract class Light {
   bool isOriginCasted = false;
   final List<Ray2> rays = [];
   final List<RaycastResult<ShapeHitbox>> results = [];
-
-
 
   update(double dt);
 
