@@ -11,7 +11,7 @@ on:
 
 jobs:
   dependencies:
-    name: Install Dependencies
+    name: Build Portfolio
     runs-on: ubuntu-latest
     env:
       my_secret: ${{secrets.commit_secret}}
@@ -22,12 +22,20 @@ jobs:
           flutter-version: "3.13.9"
           channel: 'stable'
           cache: true // 2
-      - run: flutter config --enable-web
-      - run: flutter pub get
+          
+      - name: "Enable web config in flutter"
+        run: flutter config --enable-web
+        
+      - name: "Get project dependencies"
+        run: flutter pub get
+        
       - name: "Run Flutter build"
         run: flutter build web --release
-      - run: |
+        
+      - name: "Deploy to Github Pages" 
+        run: |
           cd build/web
+          ls
           git init
           # type configurations: your user.email and user.name followed lines 
           # git config --global user.email your_email 
