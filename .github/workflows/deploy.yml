@@ -36,7 +36,7 @@ jobs:
           # Build project
           flutter build web --release --web-renderer=canvaskit
 
-      - name: Deploy
+      - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ env.GITHUB_TOKEN }}
@@ -45,17 +45,3 @@ jobs:
           user_name: 'github-ci[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Publish to gh-pages'
-        
-      # - name: "Deploy to Github Pages" 
-      #   run: |
-      #     cd build/web
-      #     git init
-      #     git config --global user.email ${{ env.EMAIL }}
-      #     git config --global user.name ${{ env.USERNAME }}
-      #     git config --global init.defaultBranch main
-      #     git remote add origin https://oauth2:${{ env.ACCESS_TOKEN }}@github.com/warioddly/portfolio.git
-      #     git checkout -b gh-pages
-      #     git add .
-      #     git commit -m "update"
-      #     git status
-      #     git push origin gh-pages -f
