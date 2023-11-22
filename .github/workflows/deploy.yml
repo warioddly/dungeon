@@ -34,7 +34,7 @@ jobs:
           flutter pub get
           
           # Build project
-          flutter build web --release
+          flutter build web --release --web-renderer=canvaskit
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
