@@ -17,13 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: "Install Flutter 3.13.9"
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.13.9"
           channel: 'stable'
           cache: true // 2
+      - name: "Install Flutter 3.13.9"
       - run: flutter config --enable-web
       - run: flutter pub get
+      - name: "Run Flutter build"
       - run: flutter build web --release
       - run: |
           cd build/web
@@ -41,3 +44,4 @@ jobs:
           git add .
           git commit -m "update"
           git push origin gh-pages -f
+        
