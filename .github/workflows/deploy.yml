@@ -47,7 +47,7 @@ jobs:
           git config --global --list
           
           git status
-          git remote add origin https://${{ secrets.TOKEN }}@github.com/warioddly/portfolio.git
+          git remote add origin https://warioddly@${{ secrets.TOKEN }}@github.com/warioddly/portfolio.git
           git checkout -b gh-pages
           git add .
           git commit -m "update"
