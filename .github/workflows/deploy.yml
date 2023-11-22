@@ -22,29 +22,30 @@ jobs:
           flutter-version: "3.13.9"
           channel: 'stable'
           cache: true // 2
-          
-      - name: "Enable web config in flutter"
-        run: flutter config --enable-web
-        
-      - name: "Get project dependencies"
-        run: flutter pub get
-        
+    
       - name: "Run Flutter build"
-        run: flutter build web --release
+        run: |
+          # Enable web config in flutter
+          flutter config --enable-web
+          
+          # Get project dependencies
+          flutter pub get
+          
+          # Build project
+          flutter build web --release
         
       - name: "Deploy to Github Pages" 
         run: |
           cd build/web
-          ls
           git init
-          # type configurations: your user.email and user.name followed lines 
-          # git config --global user.email your_email 
-          # git config --global user.name your_name 
+
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name warioddly
           git config --global init.defaultBranch main
+
+          git config --global --list
+          
           git status
-          # change this remote url for examle your remote url is https://github.com/onatcipli/flutter_web.git then the following:
           git remote add origin https://${{secrets.commit_secret}}@github.com/warioddly/portfolio.git
           git checkout -b gh-pages
           git add .
