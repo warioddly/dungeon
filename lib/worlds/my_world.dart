@@ -3,15 +3,13 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:warioddly/characters/draggable_dino.dart';
-import 'package:warioddly/decorations/items/light/light.dart';
+import 'package:warioddly/characters/ghost.dart';
 import 'package:warioddly/decorations/texts/animated_text_box.dart';
 import 'package:warioddly/game.dart';
 import 'package:warioddly/utils/configs/light.dart';
-import '../characters/dino.dart';
 import '../utils/mixins/component_light_mixin.dart';
 
 
@@ -21,7 +19,8 @@ class MyWorld extends World with HasGameRef<AdventureGame>, HasCollisionDetectio
 
 
   DragDino pla = DragDino();
-  Dino player = Dino();
+  // Wizard player = Wizard();
+  Ghost player = Ghost();
 
 
   @override
@@ -86,14 +85,14 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
 
     addLight(player, LightConfig(
       radius: 320,
-      type: LightType.torch,
-      numberOfRays: 400
+      numberOfRays: 300,
+      color: Colors.white,
     ));
 
-    addLight(pla, LightConfig(
-      radius: 250,
-      color: Colors.red,
-    ));
+    // addLight(pla, LightConfig(
+    //   radius: 250,
+    //   color: Colors.red,
+    // ));
 
   }
 
