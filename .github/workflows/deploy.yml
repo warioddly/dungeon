@@ -41,7 +41,7 @@ jobs:
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name warioddly
           git config --global init.defaultBranch main
-          git remote add origin https://oauth2:{{ secrets.TOKEN }}@github.com/warioddly/portfolio.git
+          git remote add origin https://oauth2:${{ secrets.TOKEN }}@github.com/warioddly/portfolio.git
           git checkout -b gh-pages
           git add .
           git commit -m "update"
