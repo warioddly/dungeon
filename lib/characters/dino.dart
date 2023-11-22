@@ -1,7 +1,6 @@
 
 
 import 'dart:async';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:warioddly/characters/character.dart';
@@ -9,7 +8,7 @@ import 'package:warioddly/game.dart';
 import 'package:warioddly/utils/constants/universe.dart';
 
 
-class Dino extends Character<AdventureGame> with HasGameRef<AdventureGame>, CollisionPassthrough {
+class Dino extends Character<AdventureGame> {
 
 
   Dino({ int? priority}) : super(priority: priority);
@@ -17,8 +16,40 @@ class Dino extends Character<AdventureGame> with HasGameRef<AdventureGame>, Coll
 
   @override
   Future<void> onLoad() async {
-    super.onLoad();
-    sprite = await game.loadSprite('characters/dino.png');
+    await super.onLoad();
+
+    final running = await game.loadSpriteAnimation(
+      '/characters/wizard/Run.png',
+      SpriteAnimationData.sequenced(
+        amount: 8,
+        stepTime: 0.1,
+        textureSize: Vector2.all(250)
+      ),
+    );
+
+    final idle = await game.loadSpriteAnimation(
+      '/characters/wizard/Idle.png',
+      SpriteAnimationData.sequenced(
+        amount: 8,
+        stepTime: 0.1,
+        textureSize: Vector2.all(250),
+      ),
+    );
+
+
+    character = SpriteAnimationGroupComponent<CharacterState>(
+      animations: {
+        CharacterState.running: running,
+        CharacterState.idle: idle,
+      },
+      current: CharacterState.idle,
+      size: Vector2.all(200),
+      position: size / 2 - Vector2.all(200) / 2,
+    );
+
+    add(character);
+
+
   }
 
 
@@ -35,6 +66,7 @@ class Dino extends Character<AdventureGame> with HasGameRef<AdventureGame>, Coll
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
 
     final isKeyDown = event is RawKeyDownEvent;
+    character.current = CharacterState.running;
 
     final bool handled;
     if (event.logicalKey == LogicalKeyboardKey.keyA) {
@@ -54,13 +86,18 @@ class Dino extends Character<AdventureGame> with HasGameRef<AdventureGame>, Coll
     }
 
     if (handled) {
-      angle = -velocity.angleToSigned(Vector2(1, -1));
+      if (velocity.x != 0 || velocity.y != 0) {
+        character.current = CharacterState.running;
+      } else {
+        character.current = CharacterState.idle;
+      }
+
       return false;
     }
 
+
     return super.onKeyEvent(event, keysPressed);
   }
-
 
 
 }

@@ -5,7 +5,17 @@ import 'package:flame/game.dart';
 import 'package:warioddly/utils/constants/universe.dart';
 
 
-class Character<T extends FlameGame> extends SpriteComponent with HasGameReference<T>, KeyboardHandler, CollisionCallbacks {
+enum CharacterState {
+
+  idle,
+  running,
+  jump,
+  fall,
+  attack,
+
+}
+
+class Character<T extends FlameGame> extends SpriteAnimationComponent with HasGameReference<T>, KeyboardHandler, CollisionCallbacks {
 
   Character({
     super.position,
@@ -17,6 +27,7 @@ class Character<T extends FlameGame> extends SpriteComponent with HasGameReferen
     anchor: Anchor.center,
   );
 
+  late SpriteAnimationGroupComponent<CharacterState> character;
 
   final Vector2 velocity = Vector2.zero();
   late final TextComponent positionText;

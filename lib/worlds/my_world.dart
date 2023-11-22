@@ -86,8 +86,8 @@ Thanks for stopping by, and I hope you enjoy your visit!"'''
 
     addLight(player, LightConfig(
       radius: 320,
-      color: Colors.red,
       type: LightType.torch,
+      numberOfRays: 400
     ));
 
     addLight(pla, LightConfig(
