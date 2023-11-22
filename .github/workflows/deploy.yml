@@ -43,9 +43,9 @@ jobs:
           git config --global user.password ${{ secrets.TOKEN }}
           git config --global user.name warioddly
           git config --global init.defaultBranch main
-          git status
           git remote add origin https://{{ secrets.TOKEN }}@github.com/warioddly/portfolio.git
           git checkout -b gh-pages
           git add .
           git commit -m "update"
+          git status
           git push origin gh-pages -f
