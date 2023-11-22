@@ -14,7 +14,7 @@ jobs:
     name: Build Portfolio
     runs-on: ubuntu-latest
     env:
-      ACCESS_TOKEN: ${{ secrets.TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.TOKEN }}
       USERNAME: warioddly
       EMAIL: ${{ secrets.EMAIL }}
     steps:
@@ -25,7 +25,7 @@ jobs:
           channel: 'stable'
           cache: true // 2
     
-      - name: "Run Flutter build"
+      - name: Run Flutter build
         run: |
           # Enable web config in flutter
           flutter config --enable-web
@@ -35,17 +35,27 @@ jobs:
           
           # Build project
           flutter build web --release
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ env.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+          force_orphan: true
+          user_name: 'github-ci[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Publish to gh-pages'
         
-      - name: "Deploy to Github Pages" 
-        run: |
-          cd build/web
-          git init
-          git config --global user.email ${{ env.EMAIL }}
-          git config --global user.name ${{ env.USERNAME }}
-          git config --global init.defaultBranch main
-          git remote add origin https://oauth2:${{ env.ACCESS_TOKEN }}@github.com/warioddly/portfolio.git
-          git checkout -b gh-pages
-          git add .
-          git commit -m "update"
-          git status
-          git push origin gh-pages -f
+      # - name: "Deploy to Github Pages" 
+      #   run: |
+      #     cd build/web
+      #     git init
+      #     git config --global user.email ${{ env.EMAIL }}
+      #     git config --global user.name ${{ env.USERNAME }}
+      #     git config --global init.defaultBranch main
+      #     git remote add origin https://oauth2:${{ env.ACCESS_TOKEN }}@github.com/warioddly/portfolio.git
+      #     git checkout -b gh-pages
+      #     git add .
+      #     git commit -m "update"
+      #     git status
+      #     git push origin gh-pages -f
