@@ -24,10 +24,10 @@ jobs:
           channel: 'stable'
           cache: true // 2
       - name: "Install Flutter 3.13.9"
-      - run: flutter config --enable-web
+        run: flutter config --enable-web
       - run: flutter pub get
       - name: "Run Flutter build"
-      - run: flutter build web --release
+        run: flutter build web --release
       - run: |
           cd build/web
           git init
