@@ -36,7 +36,7 @@ class Wizard extends SimplePlayer with BlockMovementCollision, Lighting {
   @override
   Future<void> onLoad() async {
 
-    // PlayerDialog.greetPlayer(gameRef, () => _greetShowed = true);
+    PlayerDialog.greetPlayer(gameRef, () => _greetShowed = true);
 
     add(RectangleHitbox(
         size: WizardSpriteSheet.size * 0.2,
