@@ -18,7 +18,6 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
       borderRadius: BorderRadius.circular(2),
       borderWidth: 2,
     );
-
   }
 
   bool enableBehaviors = true;
