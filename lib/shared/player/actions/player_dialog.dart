@@ -78,7 +78,11 @@ class PlayerDialog {
   }
 
 
-  static void execShowTalk(BonfireGameInterface gameRef, [List<Say> sayList = const []]) {
+  static void execShowTalk(
+      BonfireGameInterface gameRef,
+      VoidCallback? onClose,
+      [List<Say> sayList = const []]
+  ) {
     TalkDialog.show(
       gameRef.context,
       sayList,
@@ -90,9 +94,13 @@ class PlayerDialog {
   }
 
 
-  static void greetPlayer(BonfireGameInterface gameRef) {
+  static void greetPlayer(
+      BonfireGameInterface gameRef,
+      VoidCallback? onClose
+  ) {
     execShowTalk(
       gameRef,
+      onClose,
       [
         Say(
           text: [

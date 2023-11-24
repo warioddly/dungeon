@@ -1,6 +1,5 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/others/sprite_sheets/wizard_sprite_sheet.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
 import 'package:warioddly/shared/player/actions/player_dialog.dart';
 import 'package:flutter/material.dart';
@@ -15,30 +14,40 @@ class Wizard extends SimplePlayer with BlockMovementCollision, Lighting {
 
   Wizard(Vector2 position) : super(
     animation: WizardSpriteSheet.simpleDirectionAnimation,
-    size: Vector2.all(250),
+    size: WizardSpriteSheet.size,
     position: position,
-    speed: BlackHole.tileSize * 3.5,
+    speed: 120
   ) {
     setupMovementByJoystick(intencityEnabled: true);
-    setupLighting(
-      LightingConfig(
-        radius: width,
+    setupLighting(LightingConfig(
+        radius: width / 2,
         color: Colors.transparent,
         withPulse: true,
-      ),
-    );
+      ));
   }
 
 
   double attack = 20;
   bool canShowEmote = true;
   bool showedDialog = false;
+  bool _greetShowed = false;
 
 
   @override
   Future<void> onLoad() async {
-    PlayerDialog.greetPlayer(gameRef);
-    add(RectangleHitbox(size: size / 9, position: size / 2, anchor: Anchor.center));
+
+    // PlayerDialog.greetPlayer(gameRef, () => _greetShowed = true);
+
+    add(RectangleHitbox(
+        size: WizardSpriteSheet.size * 0.2,
+        position: Vector2(WizardSpriteSheet.size.x / 2.5, WizardSpriteSheet.size.y / 2.15)
+      ));
+
+    size = WizardSpriteSheet.size / 1;
+    scale = Vector2.all(1);
+    width =  WizardSpriteSheet.size.x;
+    height = WizardSpriteSheet.size.y;
+
     return super.onLoad();
   }
 
@@ -75,14 +84,13 @@ class Wizard extends SimplePlayer with BlockMovementCollision, Lighting {
 
 
   void execShowEmote() {
-    add(
-      AnimatedGameObject(
-        position: Vector2(width / 4, 0),
+    add(AnimatedGameObject(
+        position: Vector2(WizardSpriteSheet.size.x / 2, WizardSpriteSheet.size.y / 2.55),
+        size: Vector2.all(width / 9),
         animation: CommonSpriteSheet.emote,
-        size: Vector2.all(width / 2),
+        anchor: Anchor.center,
         loop: false,
-      ),
-    );
+      ));
   }
 
 
@@ -102,14 +110,14 @@ class Wizard extends SimplePlayer with BlockMovementCollision, Lighting {
       canShowEmote = false;
       execShowEmote();
     }
-    if (!showedDialog) {
-      showedDialog = true;
+    if (!showedDialog && _greetShowed) {
       double lastZoom = gameRef.camera.zoom;
       stopMove();
       PlayerDialog.execShowTalkWithNpc(
         gameRef,
         enemy,
         () {
+          showedDialog = true;
           if (!isDead) {
             gameRef.camera.moveToPlayerAnimated(
               effectController: EffectController(duration: 1),

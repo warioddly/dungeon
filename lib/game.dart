@@ -34,7 +34,7 @@ class GameManualMap extends StatelessWidget {
             ),
           ],
         ),
-        debugMode: true,
+        debugMode: false,
         player: Wizard(Vector2((4 * BlackHole.tileSize), (6 * BlackHole.tileSize))),
         interface: KnightInterface(),
         components: [
