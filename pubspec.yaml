@@ -63,32 +63,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/images/
-   - assets/images/topdown/
-   - assets/images/platform/
-   - assets/images/platform/fox/
-   - assets/images/platform/frog/
    - assets/images/player/
-   - assets/images/enemies/
    - assets/images/npc/wizard/
    - assets/images/npc/ghost/
    - assets/images/npc/goblin/
    - assets/images/npc/
    - assets/images/tile/
-   - assets/images/tile_random/
-   - assets/images/tiled/
-   - assets/images/tiled/top_down/
-   - assets/images/tiled/punnyworld/
-   - assets/images/tiled/simple_topdown/
-   - assets/images/tiled/tileset/
    - assets/images/itens/
-   - assets/images/lpc/body/
-   - assets/images/lpc/feet/
-   - assets/images/lpc/hair/
-   - assets/images/lpc/leg/
-   - assets/images/lpc/torco/
-   - assets/images/lpc/head/
-   - assets/images/lpc/gloves/
-   - assets/images/multi_scenario/tile/
 
 #   - images/a_dot_ham.jpeg
 
