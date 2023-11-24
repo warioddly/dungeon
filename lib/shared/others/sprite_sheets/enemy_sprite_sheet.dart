@@ -2,7 +2,7 @@ import 'package:bonfire/bonfire.dart';
 
 class GoblinSpriteSheet {
 
-  static const String path = "enemies/goblin";
+  static const String path = "npc/goblin";
 
   static Future<SpriteAnimation> get idleLeft => SpriteAnimation.load(
         "$path/goblin_idle_left.png",

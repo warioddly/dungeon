@@ -64,10 +64,10 @@ flutter:
   assets:
    - assets/images/
    - assets/images/player/
+   - assets/images/npc/
    - assets/images/npc/wizard/
    - assets/images/npc/ghost/
    - assets/images/npc/goblin/
-   - assets/images/npc/
    - assets/images/tile/
    - assets/images/itens/
 

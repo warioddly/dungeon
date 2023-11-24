@@ -2,7 +2,7 @@ import 'package:bonfire/bonfire.dart';
 
 class GhostSpriteSheet {
 
-  static const String path = "enemies/ghost";
+  static const String path = "npc/ghost";
 
   static Future<SpriteAnimation> get idle => SpriteAnimation.load(
     "$path/idle.png",
