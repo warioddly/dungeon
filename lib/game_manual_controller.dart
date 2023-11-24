@@ -1,9 +1,7 @@
 import 'dart:math';
-
 import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/worlds/blackhole.dart';
 import 'package:warioddly/shared/npc/goblin.dart';
-
 import 'shared/others/sprite_sheets/common_sprite_sheet.dart';
 
 class GameManualController extends GameComponent {
@@ -33,8 +31,7 @@ class GameManualController extends GameComponent {
       ),
     );
 
-    gameRef.add(
-      goblin,
-    );
+    gameRef.add(goblin);
+
   }
 }

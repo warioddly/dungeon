@@ -1,55 +1,19 @@
+import 'dart:async';
+
 import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/npc/goblin.dart';
 import 'package:flutter/material.dart';
 
 class KnightInterface extends GameInterface {
+
   static const followerWidgetTestId = 'BUTTON';
 
   Goblin? enemyControlled;
 
-  void changeControllerToVisibleEnemy() {
-    if (hasGameRef) {
-      if (enemyControlled == null) {
-        final v = gameRef.visibles<Goblin>();
-        if (v.isNotEmpty) {
-          enemyControlled = v.first;
-          enemyControlled?.enableBehaviors = false;
-          gameRef.camera.moveToTargetAnimated(
-            target: enemyControlled!,
-            effectController: EffectController(
-              duration: 0.5,
-              curve: Curves.easeInOut,
-            ),
-            zoom: 2,
-            onComplete: () {
-              gameRef.addJoystickObserver(
-                enemyControlled!,
-                cleanObservers: true,
-                moveCameraToTarget: true,
-              );
-            },
-          );
-        }
-      } else if (gameRef.player != null) {
-        gameRef.camera.moveToTargetAnimated(
-          target: gameRef.player!,
-          effectController: EffectController(
-            duration: 0.5,
-            curve: Curves.easeInOut,
-          ),
-          zoom: 1,
-          onComplete: () {
-            gameRef.addJoystickObserver(
-              gameRef.player!,
-              cleanObservers: true,
-              moveCameraToTarget: true,
-            );
-            enemyControlled?.enableBehaviors = true;
-            enemyControlled = null;
-          },
-        );
-      }
-    }
+  @override
+  FutureOr<void> onLoad() {
+    add(FpsTextComponent(position: Vector2(10, 10)));
+    return super.onLoad();
   }
 
   void _showDialogTest(VoidCallback completed) {
@@ -169,4 +133,5 @@ class KnightInterface extends GameInterface {
       });
     }
   }
+
 }

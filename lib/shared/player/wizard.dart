@@ -1,39 +1,47 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:warioddly/shared/others/sprite_sheets/wizard_sprite_sheet.dart';
 import 'package:warioddly/shared/worlds/blackhole.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
-import 'package:warioddly/shared/others/sprite_sheets/player_sprite_sheet.dart';
-import 'package:warioddly/shared/player/dialogs/player_dialog.dart';
+import 'package:warioddly/shared/player/actions/player_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 enum PlayerAttackType {
   attackMelee,
-  attackRange,
 }
 
-class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
+class Wizard extends SimplePlayer with BlockMovementCollision, Lighting {
+
+
+  Wizard(Vector2 position) : super(
+    animation: WizardSpriteSheet.simpleDirectionAnimation,
+    size: Vector2.all(250),
+    position: position,
+    speed: BlackHole.tileSize * 3.5,
+  ) {
+    setupMovementByJoystick(intencityEnabled: true);
+    setupLighting(
+      LightingConfig(
+        radius: width,
+        color: Colors.transparent,
+        withPulse: true,
+      ),
+    );
+  }
+
 
   double attack = 20;
   bool canShowEmote = true;
   bool showedDialog = false;
 
-  Knight(Vector2 position)
-      : super(
-          animation: PlayerSpriteSheet.simpleDirectionAnimation,
-          size: Vector2.all(BlackHole.tileSize),
-          position: position,
-          speed: BlackHole.tileSize * 1.5,
-          life: 200,
-        ) {
-    setupMovementByJoystick(intencityEnabled: true);
-    setupLighting(
-      LightingConfig(
-        radius: width * 1.5,
-        color: Colors.cyan,
-        withPulse: true,
-      ),
-    );
+
+  @override
+  Future<void> onLoad() async {
+    PlayerDialog.greetPlayer(gameRef);
+    add(RectangleHitbox(size: size / 9, position: size / 2, anchor: Anchor.center));
+    return super.onLoad();
   }
+
 
   @override
   void onJoystickChangeDirectional(JoystickDirectionalEvent event) {
@@ -43,6 +51,7 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
     super.onJoystickChangeDirectional(event);
   }
 
+
   @override
   void onJoystickAction(JoystickActionEvent event) {
     if (hasGameRef && gameRef.sceneBuilderStatus.isRunning || isDead) {
@@ -50,31 +59,20 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
     }
     if (event.event == ActionEvent.DOWN) {
       if (event.id == LogicalKeyboardKey.space || event.id == PlayerAttackType.attackMelee) {
-          execMeleeAttack(attack);
+          // execMeleeAttack(attack);
       }
     }
 
     super.onJoystickAction(event);
   }
 
+
   @override
   void update(double dt) {
     super.update(dt);
     _checkViewEnemy(dt);
-
   }
 
-  @override
-  void receiveDamage(AttackFromEnum attacker, double damage, identify) {
-    showDamage(
-      damage,
-      config: TextStyle(
-        fontSize: width / 3,
-        color: Colors.red,
-      ),
-    );
-    super.receiveDamage(attacker, damage, identify);
-  }
 
   void execShowEmote() {
     add(
@@ -85,12 +83,6 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
         loop: false,
       ),
     );
-  }
-
-  @override
-  Future<void> onLoad() async {
-    add(RectangleHitbox(size: size / 2, position: size / 4));
-    return super.onLoad();
   }
 
 
@@ -104,6 +96,7 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
     }
   }
 
+
   void _handleObserveEnemy(Enemy enemy) {
     if (canShowEmote) {
       canShowEmote = false;
@@ -113,7 +106,7 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
       showedDialog = true;
       double lastZoom = gameRef.camera.zoom;
       stopMove();
-      PlayerDialog.execShowTalk(
+      PlayerDialog.execShowTalkWithNpc(
         gameRef,
         enemy,
         () {
@@ -128,11 +121,15 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
     }
   }
 
+
   void execMeleeAttack(double attack) {
+    stopMove();
     simpleAttackMelee(
       damage: attack,
-      animationRight: CommonSpriteSheet.whiteAttackEffectRight,
-      size: Vector2.all(BlackHole.tileSize),
+      animationRight: WizardSpriteSheet.attack,
+      size: Vector2.all(250),
     );
   }
+
+
 }

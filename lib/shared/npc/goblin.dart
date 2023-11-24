@@ -4,15 +4,8 @@ import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
 import 'package:warioddly/shared/others/sprite_sheets/enemy_sprite_sheet.dart';
 import 'package:flutter/material.dart';
 
-class Goblin extends SimpleEnemy
-    with
-        BlockMovementCollision,
-        JoystickListener,
-        MovementByJoystick,
-        AutomaticRandomMovement,
-        UseLifeBar {
-  double attack = 20;
-  bool enableBehaviors = true;
+class Goblin extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMovement, UseLifeBar {
+
   Goblin(Vector2 position)
       : super(
           animation: GoblinSpriteSheet.simpleDirectionAnimation,
@@ -27,6 +20,9 @@ class Goblin extends SimpleEnemy
     );
   }
 
+  bool enableBehaviors = true;
+
+
   @override
   void update(double dt) {
     super.update(dt);
@@ -36,14 +32,14 @@ class Goblin extends SimpleEnemy
       seeAndMoveToPlayer(
         radiusVision: BlackHole.tileSize,
         closePlayer: (p) {
-          execAttack(attack);
+          // execAttack(attack);
         },
         notObserved: () {
           seeAndMoveToAttackRange(
             minDistanceFromPlayer: BlackHole.tileSize * 2,
             useDiagonal: false,
             positioned: (p) {
-              execAttackRange(attack);
+              // execAttackRange(attack);
             },
             radiusVision: BlackHole.tileSize * 3,
             notObserved: () {

@@ -3,7 +3,6 @@ import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/decorations/barrel_dragable.dart';
 import 'package:warioddly/shared/decorations/chest.dart';
 import 'package:warioddly/shared/decorations/spikes.dart';
-import 'package:warioddly/shared/decorations/torch.dart';
 import 'package:warioddly/shared/npc/ghost.dart';
 import 'package:warioddly/shared/npc/goblin.dart';
 
@@ -41,19 +40,18 @@ class BlackHole {
 
   static List<GameDecoration> decorations() {
     return [
-
       Spikes(
         getRelativeTilePosition(7, 7),
       ),
       BarrelDraggable(getRelativeTilePosition(8, 6)),
-      GameDecorationWithCollision.withSprite(
-        sprite: Sprite.load('itens/barrel.png'),
-        position: getRelativeTilePosition(10, 6),
-        size: Vector2(tileSize, tileSize),
-        collisions: [
-          RectangleHitbox(size: Vector2(tileSize / 1.5, tileSize / 1.5))
-        ],
-      ),
+      // GameDecorationWithCollision.withSprite(
+      //   sprite: Sprite.load('itens/barrel.png'),
+      //   position: getRelativeTilePosition(10, 6),
+      //   size: Vector2(tileSize, tileSize),
+      //   collisions: [
+      //     RectangleHitbox(size: Vector2(tileSize / 1.5, tileSize / 1.5))
+      //   ],
+      // ),
       Chest(getRelativeTilePosition(18, 7)),
       GameDecorationWithCollision.withSprite(
         sprite: Sprite.load('itens/table.png'),
@@ -71,30 +69,30 @@ class BlackHole {
           RectangleHitbox(size: Vector2(tileSize, tileSize * 0.8)),
         ],
       ),
-      Torch(getRelativeTilePosition(4, 4)),
-      Torch(getRelativeTilePosition(12, 4)),
-      Torch(getRelativeTilePosition(20, 4)),
-      Torch(getRelativeTilePosition(28, 4)),
-      GameDecoration.withSprite(
-        sprite: Sprite.load('itens/flag_red.png'),
-        position: getRelativeTilePosition(24, 4),
-        size: Vector2(tileSize, tileSize),
-      ),
-      GameDecoration.withSprite(
-        sprite: Sprite.load('itens/flag_red.png'),
-        position: getRelativeTilePosition(6, 4),
-        size: Vector2(tileSize, tileSize),
-      ),
-      GameDecoration.withSprite(
-        sprite: Sprite.load('itens/prisoner.png'),
-        position: getRelativeTilePosition(10, 4),
-        size: Vector2(tileSize, tileSize),
-      ),
-      GameDecoration.withSprite(
-        sprite: Sprite.load('itens/flag_red.png'),
-        position: getRelativeTilePosition(14, 4),
-        size: Vector2(tileSize, tileSize),
-      )
+      // Torch(getRelativeTilePosition(4, 4)),
+      // Torch(getRelativeTilePosition(12, 4)),
+      // Torch(getRelativeTilePosition(20, 4)),
+      // Torch(getRelativeTilePosition(28, 4)),
+      // GameDecoration.withSprite(
+      //   sprite: Sprite.load('itens/flag_red.png'),
+      //   position: getRelativeTilePosition(24, 4),
+      //   size: Vector2(tileSize, tileSize),
+      // ),
+      // GameDecoration.withSprite(
+      //   sprite: Sprite.load('itens/flag_red.png'),
+      //   position: getRelativeTilePosition(6, 4),
+      //   size: Vector2(tileSize, tileSize),
+      // ),
+      // GameDecoration.withSprite(
+      //   sprite: Sprite.load('itens/prisoner.png'),
+      //   position: getRelativeTilePosition(10, 4),
+      //   size: Vector2(tileSize, tileSize),
+      // ),
+      // GameDecoration.withSprite(
+      //   sprite: Sprite.load('itens/flag_red.png'),
+      //   position: getRelativeTilePosition(14, 4),
+      //   size: Vector2(tileSize, tileSize),
+      // )
     ];
   }
 

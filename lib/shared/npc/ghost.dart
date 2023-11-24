@@ -2,10 +2,9 @@ import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/others/sprite_sheets/ghost_sprite_sheet.dart';
 import 'package:warioddly/shared/worlds/blackhole.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
-import 'package:warioddly/shared/others/sprite_sheets/enemy_sprite_sheet.dart';
 import 'package:flutter/material.dart';
 
-class Ghost extends SimpleEnemy with BlockMovementCollision, JoystickListener, MovementByJoystick, AutomaticRandomMovement, UseLifeBar {
+class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMovement, UseLifeBar {
 
   Ghost(Vector2 position) : super(
       animation: GhostSpriteSheet.simpleDirectionAnimation,
@@ -63,7 +62,7 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, JoystickListener, M
     super.die();
     gameRef.add(
       AnimatedGameObject(
-        animation: CommonSpriteSheet.smokeExplosion,
+        animation: GhostSpriteSheet.death,
         position: position,
         size: Vector2.all(BlackHole.tileSize),
         loop: false,
