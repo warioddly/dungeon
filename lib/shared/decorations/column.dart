@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
 
 class ColumnDecoration extends GameDecoration {
@@ -7,7 +7,7 @@ class ColumnDecoration extends GameDecoration {
       : super.withSprite(
           sprite: CommonSpriteSheet.columnSprite,
           position: position,
-          size: Vector2(BlackHole.tileSize, BlackHole.tileSize * 3),
+          size: Vector2(Dungeon.tileSize, Dungeon.tileSize * 3),
         );
 
   @override
@@ -15,12 +15,12 @@ class ColumnDecoration extends GameDecoration {
     add(
       RectangleHitbox(
         size: Vector2(
-          BlackHole.tileSize * 0.8,
-          BlackHole.tileSize / 2,
+          Dungeon.tileSize * 0.8,
+          Dungeon.tileSize / 2,
         ),
         position: Vector2(
-          BlackHole.tileSize * 0.1,
-          BlackHole.tileSize * 1.8,
+          Dungeon.tileSize * 0.1,
+          Dungeon.tileSize * 1.8,
         ),
       ),
     );

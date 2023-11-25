@@ -1,9 +1,21 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:flutter/widgets.dart';
 
 class WizardSpriteSheet {
 
   static const String path = "npc/wizard";
   static final Vector2 size = Vector2(250, 250);
+
+
+  static Widget get spriteSheetAsWidget => SizedBox(
+    width: 100,
+    height: 100,
+    child: Transform.scale(
+      scale: 6,
+      child: WizardSpriteSheet.idleRight.asWidget(),
+    ),
+  );
+
 
   static Future<SpriteAnimation> get idleLeft => SpriteAnimation.load(
     "$path/idle_left.png",

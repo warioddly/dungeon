@@ -1,6 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/others/sprite_sheets/ghost_sprite_sheet.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +9,12 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
   Ghost(Vector2 position) : super(
       animation: GhostSpriteSheet.simpleDirectionAnimation,
       position: position,
-      size: Vector2.all(BlackHole.tileSize * 2),
-      speed: BlackHole.tileSize,
+      size: Vector2.all(Dungeon.tileSize * 2),
+      speed: Dungeon.tileSize,
       life: 100,
   ) {
     setupLifeBar(
-      size: Vector2(BlackHole.tileSize * 1.5, 5),
+      size: Vector2(Dungeon.tileSize * 1.5, 5),
       borderRadius: BorderRadius.circular(2),
       borderWidth: 2,
     );
@@ -29,23 +29,23 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
 
     if (!gameRef.sceneBuilderStatus.isRunning) {
       seeAndMoveToPlayer(
-        radiusVision: BlackHole.tileSize,
+        radiusVision: Dungeon.tileSize,
         // closePlayer: (p) {
         //   execAttack(attack);
         // },
         notObserved: () {
           seeAndMoveToAttackRange(
-            minDistanceFromPlayer: BlackHole.tileSize * 2,
+            minDistanceFromPlayer: Dungeon.tileSize * 2,
             useDiagonal: false,
             positioned: (p) {
               // execAttackRange(attack);
             },
-            radiusVision: BlackHole.tileSize * 3,
+            radiusVision: Dungeon.tileSize * 3,
             notObserved: () {
               runRandomMovement(
                 dt,
                 speed: speed / 2,
-                maxDistance: (BlackHole.tileSize * 3).toInt(),
+                maxDistance: (Dungeon.tileSize * 3).toInt(),
               );
               return false;
             },
@@ -63,7 +63,7 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
       AnimatedGameObject(
         animation: GhostSpriteSheet.death,
         position: position,
-        size: Vector2.all(BlackHole.tileSize),
+        size: Vector2.all(Dungeon.tileSize),
         loop: false,
       ),
     );
@@ -78,7 +78,7 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
       id: 35,
       size: Vector2.all(width * 0.9),
       damage: damage,
-      speed: BlackHole.tileSize * 3,
+      speed: Dungeon.tileSize * 3,
       collision: RectangleHitbox(
         size: Vector2.all(width / 2),
         position: Vector2(width * 0.25, width * 0.25),
@@ -97,7 +97,7 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
       size: Vector2.all(width),
       damage: damage / 2,
       interval: 400,
-      sizePush: BlackHole.tileSize / 2,
+      sizePush: Dungeon.tileSize / 2,
       animationRight: CommonSpriteSheet.blackAttackEffectRight,
     );
   }
@@ -119,12 +119,12 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
     add(
       RectangleHitbox(
         size: Vector2(
-          BlackHole.tileSize * 0.4,
-          BlackHole.tileSize * 0.4,
+          Dungeon.tileSize * 0.4,
+          Dungeon.tileSize * 0.4,
         ),
         position: Vector2(
-          BlackHole.tileSize * 0.2,
-          BlackHole.tileSize * 0.2,
+          Dungeon.tileSize * 0.2,
+          Dungeon.tileSize * 0.2,
         ),
       ),
     );
