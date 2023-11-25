@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/decorations/potion_life.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 import 'package:flutter/material.dart';
 
 class Chest extends GameDecoration with TapGesture, Vision {
@@ -11,7 +11,7 @@ class Chest extends GameDecoration with TapGesture, Vision {
   Chest(Vector2 position)
       : super.withAnimation(
           animation: CommonSpriteSheet.chestAnimated,
-          size: Vector2.all(BlackHole.tileSize * 0.6),
+          size: Vector2.all(Dungeon.tileSize * 0.6),
           position: position,
         ) {
     _textConfig = TextPaint(
@@ -36,7 +36,7 @@ class Chest extends GameDecoration with TapGesture, Vision {
         notObserved: () {
           _observedPlayer = false;
         },
-        radiusVision: BlackHole.tileSize,
+        radiusVision: Dungeon.tileSize,
       );
     }
     super.update(dt);
@@ -91,7 +91,7 @@ class Chest extends GameDecoration with TapGesture, Vision {
       AnimatedGameObject(
         animation: CommonSpriteSheet.smokeExplosion,
         position: position,
-        size: Vector2.all(BlackHole.tileSize * 0.5),
+        size: Vector2.all(Dungeon.tileSize * 0.5),
         loop: false,
       ),
     );

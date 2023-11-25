@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 import 'package:warioddly/game_manual_controller.dart';
 import 'package:warioddly/shared/player/wizard_interface.dart';
 import 'package:warioddly/shared/player/wizard.dart';
@@ -34,19 +34,19 @@ class GameManualMap extends StatelessWidget {
             ),
           ],
         ),
-        debugMode: false,
-        player: Wizard(Vector2((4 * BlackHole.tileSize), (6 * BlackHole.tileSize))),
+        debugMode: true,
+        player: Wizard(Vector2((4 * Dungeon.tileSize), (6 * Dungeon.tileSize))),
         interface: KnightInterface(),
         components: [
-          ...BlackHole.enemies(),
-          ...BlackHole.decorations(),
+          ...Dungeon.enemies(),
+          ...Dungeon.decorations(),
           GameManualController(),
         ],
         cameraConfig: CameraConfig(
-          zoom: getZoomFromMaxVisibleTile(context, BlackHole.tileSize, 20),
+          zoom: getZoomFromMaxVisibleTile(context, Dungeon.tileSize, 20),
           speed: 1.5,
         ),
-        map: BlackHole.map(),
+        map: Dungeon.map(),
         backgroundColor: Colors.blueGrey[900]!,
         lightingColorGame: Colors.black.withOpacity(0.75),
       );

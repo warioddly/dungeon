@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:warioddly/shared/others/actions/player_dialog.dart';
 import 'package:warioddly/shared/others/sprite_sheets/wizard_sprite_sheet.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
-import 'package:warioddly/shared/player/actions/player_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -36,7 +36,7 @@ class Wizard extends SimplePlayer with BlockMovementCollision, Lighting {
   @override
   Future<void> onLoad() async {
 
-    PlayerDialog.greetPlayer(gameRef, () => _greetShowed = true);
+    // PlayerDialog.greetPlayer(gameRef, () => _greetShowed = true);
 
     add(RectangleHitbox(
         size: WizardSpriteSheet.size * 0.2,

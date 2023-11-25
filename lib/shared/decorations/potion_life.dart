@@ -1,6 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 
 class PotionLife extends GameDecoration with Sensor<Player>, Movement {
   final double life;
@@ -10,7 +10,7 @@ class PotionLife extends GameDecoration with Sensor<Player>, Movement {
       : super.withSprite(
           sprite: CommonSpriteSheet.potionLifeSprite,
           position: position,
-          size: size ?? Vector2.all(BlackHole.tileSize * 0.5),
+          size: size ?? Vector2.all(Dungeon.tileSize * 0.5),
         );
 
   @override

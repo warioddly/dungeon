@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:bonfire/bonfire.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 import 'package:warioddly/shared/npc/goblin.dart';
 import 'shared/others/sprite_sheets/common_sprite_sheet.dart';
 
@@ -17,15 +17,15 @@ class GameManualController extends GameComponent {
   }
 
   void _addEnemyInWorld() {
-    double x = BlackHole.tileSize * (4 + Random().nextInt(25));
-    double y = BlackHole.tileSize * (5 + Random().nextInt(3));
+    double x = Dungeon.tileSize * (4 + Random().nextInt(25));
+    double y = Dungeon.tileSize * (5 + Random().nextInt(3));
 
     final goblin = Goblin(Vector2(x, y));
 
     gameRef.add(
       AnimatedGameObject(
         animation: CommonSpriteSheet.smokeExplosion,
-        size: Vector2.all(BlackHole.tileSize),
+        size: Vector2.all(Dungeon.tileSize),
         position: goblin.position,
         loop: false,
       ),

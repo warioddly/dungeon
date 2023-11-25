@@ -1,12 +1,20 @@
 import 'dart:math';
 import 'package:bonfire/bonfire.dart';
-import 'package:warioddly/shared/decorations/barrel_dragable.dart';
-import 'package:warioddly/shared/decorations/chest.dart';
-import 'package:warioddly/shared/decorations/spikes.dart';
+import 'package:warioddly/shared/decorations/crystal/blue_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/dark_red_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/green_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/pink_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/red_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/violet_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/yellow_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/yellow_green_crystal.dart';
 import 'package:warioddly/shared/npc/ghost.dart';
 import 'package:warioddly/shared/npc/goblin.dart';
+import 'package:warioddly/shared/others/constants/portfolio.dart';
+import 'package:warioddly/shared/others/models/portfolio_model.dart';
 
-class BlackHole {
+class Dungeon {
 
   static double tileSize = 45;
 
@@ -40,10 +48,12 @@ class BlackHole {
 
   static List<GameDecoration> decorations() {
     return [
-      Spikes(
-        getRelativeTilePosition(7, 7),
-      ),
-      BarrelDraggable(getRelativeTilePosition(8, 6)),
+      ..._generateRandomCrystalWithProject()
+
+      // Spikes(
+      //   getRelativeTilePosition(7, 7),
+      // ),
+      // BarrelDraggable(getRelativeTilePosition(8, 6)),
       // GameDecorationWithCollision.withSprite(
       //   sprite: Sprite.load('itens/barrel.png'),
       //   position: getRelativeTilePosition(10, 6),
@@ -52,23 +62,23 @@ class BlackHole {
       //     RectangleHitbox(size: Vector2(tileSize / 1.5, tileSize / 1.5))
       //   ],
       // ),
-      Chest(getRelativeTilePosition(18, 7)),
-      GameDecorationWithCollision.withSprite(
-        sprite: Sprite.load('itens/table.png'),
-        position: getRelativeTilePosition(15, 7),
-        size: Vector2(tileSize, tileSize),
-        collisions: [
-          RectangleHitbox(size: Vector2(tileSize, tileSize * 0.8)),
-        ],
-      ),
-      GameDecorationWithCollision.withSprite(
-        sprite: Sprite.load('itens/table.png'),
-        position: getRelativeTilePosition(27, 6),
-        size: Vector2(tileSize, tileSize),
-        collisions: [
-          RectangleHitbox(size: Vector2(tileSize, tileSize * 0.8)),
-        ],
-      ),
+      // Chest(getRelativeTilePosition(18, 7)),
+      // GameDecorationWithCollision.withSprite(
+      //   sprite: Sprite.load('itens/table.png'),
+      //   position: getRelativeTilePosition(15, 7),
+      //   size: Vector2(tileSize, tileSize),
+      //   collisions: [
+      //     RectangleHitbox(size: Vector2(tileSize, tileSize * 0.8)),
+      //   ],
+      // ),
+      // GameDecorationWithCollision.withSprite(
+      //   sprite: Sprite.load('itens/table.png'),
+      //   position: getRelativeTilePosition(27, 6),
+      //   size: Vector2(tileSize, tileSize),
+      //   collisions: [
+      //     RectangleHitbox(size: Vector2(tileSize, tileSize * 0.8)),
+      //   ],
+      // ),
       // Torch(getRelativeTilePosition(4, 4)),
       // Torch(getRelativeTilePosition(12, 4)),
       // Torch(getRelativeTilePosition(20, 4)),
@@ -99,10 +109,13 @@ class BlackHole {
   static List<Enemy> enemies() {
     return [
       Ghost(getRelativeTilePosition(14, 6)),
+
+      Ghost(getRelativeTilePosition(2, 6)),
       // Goblin(getRelativeTilePosition(14, 6)),
       Goblin(getRelativeTilePosition(25, 6)),
     ];
   }
+
 
   static String randomFloor() {
     int p = Random().nextInt(6);
@@ -124,10 +137,44 @@ class BlackHole {
     }
   }
 
+
   static Vector2 getRelativeTilePosition(int x, int y) {
     return Vector2(
       (x * tileSize).toDouble(),
       (y * tileSize).toDouble(),
     );
   }
+
+
+  static List<Crystal> _generateRandomCrystalWithProject() {
+
+    List<Crystal> crystals = [];
+
+    for (ProjectModel project in PortfolioConstants.projects) {
+      crystals.add(
+        generateRandomCrystal(
+          getRelativeTilePosition(Random().nextInt(30), Random().nextInt(10)),
+          project
+        )
+      );
+    }
+
+    return crystals;
+  }
+
+
+  static generateRandomCrystal(Vector2 position, ProjectModel projectModel) {
+    return switch (Random().nextInt(10)) {
+      0 => BlueCrystal(position: position, project: projectModel),
+      1 => DarkRedCrystal(position: position, project: projectModel),
+      2 => GreenCrystal(position: position, project: projectModel),
+      3 => PinkCrystal(position: position, project: projectModel),
+      4 => RedCrystal(position: position, project: projectModel),
+      5 => VioletCrystal(position: position, project: projectModel),
+      6 => YellowCrystal(position: position, project: projectModel),
+      7 => YellowGreenCrystal(position: position, project: projectModel),
+      _ => BlueCrystal(position: position, project: projectModel)
+    };
+  }
+
 }

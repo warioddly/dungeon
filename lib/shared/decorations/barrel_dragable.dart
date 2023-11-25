@@ -1,6 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 import 'package:flutter/material.dart';
 
 class BarrelDraggable extends GameDecoration
@@ -14,7 +14,7 @@ class BarrelDraggable extends GameDecoration
       : super.withSprite(
           sprite: CommonSpriteSheet.barrelSprite,
           position: position,
-          size: Vector2.all(BlackHole.tileSize),
+          size: Vector2.all(Dungeon.tileSize),
         ) {
     _textConfig = TextPaint(
       style: TextStyle(color: Colors.white, fontSize: width / 4),

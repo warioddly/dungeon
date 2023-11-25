@@ -1,6 +1,10 @@
 import 'package:bonfire/bonfire.dart';
 
 class CommonSpriteSheet {
+
+  static const String path = 'decorations/itens';
+  static final Vector2 size = Vector2(32, 32);
+
   static Future<SpriteAnimation> get explosionAnimation => SpriteAnimation.load(
         "player/explosion_fire.png",
         SpriteAnimationData.sequenced(
@@ -144,7 +148,7 @@ class CommonSpriteSheet {
       );
 
   static Future<SpriteAnimation> get chestAnimated => SpriteAnimation.load(
-        "itens/chest_spritesheet.png",
+        "$path/itens/chest_spritesheet.png",
         SpriteAnimationData.sequenced(
           amount: 8,
           stepTime: 0.1,
@@ -153,7 +157,7 @@ class CommonSpriteSheet {
       );
 
   static Future<SpriteAnimation> get torchAnimated => SpriteAnimation.load(
-        "itens/torch_spritesheet.png",
+        "$path/itens/torch_spritesheet.png",
         SpriteAnimationData.sequenced(
           amount: 6,
           stepTime: 0.1,
@@ -161,9 +165,9 @@ class CommonSpriteSheet {
         ),
       );
 
-  static Future<Sprite> get barrelSprite => Sprite.load('itens/barrel.png');
-  static Future<Sprite> get columnSprite => Sprite.load('itens/column.png');
-  static Future<Sprite> get spikesSprite => Sprite.load('itens/spikes.png');
+  static Future<Sprite> get barrelSprite => Sprite.load('$path/barrel.png');
+  static Future<Sprite> get columnSprite => Sprite.load('$path/column.png');
+  static Future<Sprite> get spikesSprite => Sprite.load('$path/spikes.png');
   static Future<Sprite> get potionLifeSprite =>
       Sprite.load('itens/potion_life.png');
 }

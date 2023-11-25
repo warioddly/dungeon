@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:warioddly/shared/worlds/blackhole.dart';
+import 'package:warioddly/shared/worlds/dungeon.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
 
 class Spikes extends GameDecoration with Sensor<Attackable> {
@@ -7,7 +7,7 @@ class Spikes extends GameDecoration with Sensor<Attackable> {
       : super.withSprite(
           sprite: CommonSpriteSheet.spikesSprite,
           position: position,
-          size: size ?? Vector2.all(BlackHole.tileSize / 1.5),
+          size: size ?? Vector2.all(Dungeon.tileSize / 1.5),
         ) {
     setSensorInterval(500);
   }
