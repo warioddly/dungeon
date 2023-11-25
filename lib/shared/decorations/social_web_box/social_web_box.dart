@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:warioddly/shared/others/actions/decoration_dialog.dart';
 import 'package:warioddly/shared/others/models/portfolio_model.dart';
 import 'package:warioddly/shared/others/sprite_sheets/common_sprite_sheet.dart';
-import 'package:warioddly/shared/others/sprite_sheets/crystal_sprite_sheet.dart';
 import 'package:warioddly/shared/others/sprite_sheets/social_box_sprite_sheet.dart';
 import 'package:warioddly/shared/worlds/dungeon.dart';
 
