@@ -20,10 +20,10 @@ class Wizard extends SimplePlayer with BlockMovementCollision, Lighting {
   ) {
     setupMovementByJoystick(intencityEnabled: true);
     setupLighting(LightingConfig(
-        radius: width / 2,
-        color: Colors.transparent,
-        withPulse: true,
-      ));
+      radius: width / 2,
+      color: Colors.transparent,
+      withPulse: true,
+    ));
   }
 
 
