@@ -19,7 +19,6 @@ class Crystal extends GameDecoration with TapGesture, Vision {
     position: position,
     lightingConfig: LightingConfig(
       radius: CrystalSpriteSheet.size.x,
-      blurBorder: CrystalSpriteSheet.size.x,
       color: color ?? Colors.white.withOpacity(0.4),
       withPulse: true,
     )
@@ -39,7 +38,7 @@ class Crystal extends GameDecoration with TapGesture, Vision {
 
   @override
   Future<void> onLoad() {
-    add(RectangleHitbox());
+    // add(RectangleHitbox());
     return super.onLoad();
   }
 
@@ -72,7 +71,11 @@ class Crystal extends GameDecoration with TapGesture, Vision {
       _textConfig.render(
         canvas,
         'Touch me',
-        Vector2(width / -4.5, height),
+          Vector2(
+            width / 2,
+            height * 1.2,
+          ),
+          anchor: Anchor.center
       );
     }
   }
@@ -81,13 +84,9 @@ class Crystal extends GameDecoration with TapGesture, Vision {
   @override
   void onTap() {
     if (_observedPlayer && project != null) {
-      CrystalDialog.show(gameRef, this, project!);
+      DecorationDialog.showCrystal(gameRef, this, project!);
     }
   }
-
-
-  @override
-  void onTapCancel() {}
 
 
   void _showEmote() {

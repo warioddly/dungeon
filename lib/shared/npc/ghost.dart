@@ -118,14 +118,9 @@ class Ghost extends SimpleEnemy with BlockMovementCollision, AutomaticRandomMove
   Future<void> onLoad() {
     add(
       RectangleHitbox(
-        size: Vector2(
-          Dungeon.tileSize * 0.4,
-          Dungeon.tileSize * 0.4,
-        ),
-        position: Vector2(
-          Dungeon.tileSize * 0.2,
-          Dungeon.tileSize * 0.2,
-        ),
+        size: Vector2(width / 2, height / 2),
+        position: Vector2(width / 2, height / 2),
+        anchor: Anchor.center,
       ),
     );
     return super.onLoad();
