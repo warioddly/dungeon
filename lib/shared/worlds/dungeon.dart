@@ -25,11 +25,6 @@ class Dungeon {
 
   static double tileSize = 45;
 
-  static const String floor_1 = 'tile/floor_1.png';
-  static const String floor_2 = 'tile/floor_2.png';
-  static const String floor_3 = 'tile/floor_3.png';
-  static const String floor_4 = 'tile/floor_4.png';
-
   static void generateMap(
     List<TileModel> tileList,
     int indexRow,
@@ -121,27 +116,6 @@ class Dungeon {
       // Goblin(getRelativeTilePosition(14, 6)),
       Goblin(getRelativeTilePosition(25, 6)),
     ];
-  }
-
-
-  static String randomFloor() {
-    int p = Random().nextInt(6);
-    switch (p) {
-      case 0:
-        return floor_1;
-      case 1:
-        return floor_2;
-      case 2:
-        return floor_3;
-      case 3:
-        return floor_4;
-      case 4:
-        return floor_3;
-      case 5:
-        return floor_4;
-      default:
-        return floor_1;
-    }
   }
 
 

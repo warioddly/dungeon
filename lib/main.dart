@@ -69,7 +69,20 @@ class _HomePageState extends State<HomePage> {
           zoom: getZoomFromMaxVisibleTile(context, Dungeon.tileSize, 20),
           speed: 1.5,
         ),
-        map: Dungeon.map(),
+        // map: WorldMapByTiled(
+        //   'images/tiled/mapa$map.json',
+        //   forceTileSize: Vector2(DungeonMap.tileSize, DungeonMap.tileSize),
+        //   objectsBuilder: {
+        //     'goblin': (properties) => Goblin(properties.position),
+        //     'torch': (properties) => Torch(properties.position),
+        //     'barrel': (properties) => BarrelDraggable(properties.position),
+        //     'spike': (properties) => Spikes(properties.position),
+        //     'column': (properties) => ColumnDecoration(properties.position),
+        //     'chest': (properties) => Chest(properties.position),
+        //     'critter': (properties) => Critter(properties.position),
+        //     'wizard': (properties) => Wizard(properties.position),
+        //   },
+        // ),
         backgroundColor: Colors.blueGrey[900]!,
         lightingColorGame: Colors.black.withOpacity(0.75),
       )
