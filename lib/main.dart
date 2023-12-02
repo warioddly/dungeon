@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        debugMode: true,
+        debugMode: false,
         player: Wizard(Vector2(2000, 1350)),
         interface: KnightInterface(),
         components: [
@@ -72,14 +72,12 @@ class _HomePageState extends State<HomePage> {
           forceTileSize: Vector2.all(16),
           objectsBuilder: {
             'object': (TiledObjectProperties properties) {
-              print(1111);
               return RecHItbox(
                 position: properties.position,
                 size: properties.size,
               );
             },
             'laaa': (TiledObjectProperties properties) {
-              print(2222);
               return RecHItbox(
                 position: properties.position,
                 size: properties.size,
