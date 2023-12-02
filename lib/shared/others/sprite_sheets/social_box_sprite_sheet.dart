@@ -3,7 +3,7 @@ import 'package:bonfire/bonfire.dart';
 class SocialBoxSpriteSheet {
 
   static const String path = 'decorations/brands';
-  static final Vector2 size = Vector2(32, 32);
+  static final Vector2 size = Vector2(25, 25);
 
   static Future<Sprite> get github => Sprite.load("$path/github.png");
 

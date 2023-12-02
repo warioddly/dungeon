@@ -39,7 +39,6 @@ class SocialWebBox extends GameDecoration with TapGesture, Vision {
   Future<void> onLoad() {
     // add(RectangleHitbox());
     priority = 20;
-
     return super.onLoad();
   }
 

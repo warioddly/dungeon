@@ -25,38 +25,12 @@ class Dungeon {
 
   static double tileSize = 45;
 
-  static const String floor_1 = 'tile/floor_1.png';
-  static const String floor_2 = 'tile/floor_2.png';
-  static const String floor_3 = 'tile/floor_3.png';
-  static const String floor_4 = 'tile/floor_4.png';
-
-  static void generateMap(
-    List<TileModel> tileList,
-    int indexRow,
-    int indexColumn,
-    String pngImage,
-  ) {
-    tileList.add(
-      TileModel(
-        sprite: TileModelSprite(path: pngImage),
-        x: indexColumn.toDouble(),
-        y: indexRow.toDouble(),
-        collisions: [RectangleHitbox(size: Vector2(tileSize, tileSize))],
-        width: tileSize,
-        height: tileSize,
-      ),
-    );
-  }
-
-  static WorldMap map() {
-    List<TileModel> tileList = [];
-    return WorldMap(tileList);
-  }
 
   static List<GameDecoration> decorations() {
     return [
       ..._generateRandomCrystalWithProject(),
-      ..._generateSocialBox()
+      ..._generateSocialBox(),
+      // ..._generateStatues(),
       // Spikes(
       //   getRelativeTilePosition(7, 7),
       // ),
@@ -113,43 +87,17 @@ class Dungeon {
     ];
   }
 
+
   static List<Enemy> enemies() {
     return [
       Ghost(getRelativeTilePosition(14, 6)),
 
       Ghost(getRelativeTilePosition(2, 6)),
+
+      Ghost(getRelativeTilePosition(7, 12)),
       // Goblin(getRelativeTilePosition(14, 6)),
       Goblin(getRelativeTilePosition(25, 6)),
     ];
-  }
-
-
-  static String randomFloor() {
-    int p = Random().nextInt(6);
-    switch (p) {
-      case 0:
-        return floor_1;
-      case 1:
-        return floor_2;
-      case 2:
-        return floor_3;
-      case 3:
-        return floor_4;
-      case 4:
-        return floor_3;
-      case 5:
-        return floor_4;
-      default:
-        return floor_1;
-    }
-  }
-
-
-  static Vector2 getRelativeTilePosition(int x, int y) {
-    return Vector2(
-      (x * tileSize).toDouble(),
-      (y * tileSize).toDouble(),
-    );
   }
 
 
@@ -186,7 +134,6 @@ class Dungeon {
 
   static List<SocialWebBox> _generateSocialBox() {
 
-
     generateSocialBox(Vector2 position, ProjectModel projectModel) {
       return switch (projectModel.title.toLowerCase()) {
         'linkedin' => LinkedInBox(position: position, project: projectModel),
@@ -197,7 +144,6 @@ class Dungeon {
         _ => IoBox(position: position, project: projectModel),
       };
     }
-
 
     List<SocialWebBox> boxes = [];
 
@@ -211,6 +157,14 @@ class Dungeon {
     }
 
     return boxes;
+  }
+
+
+  static Vector2 getRelativeTilePosition(int x, int y) {
+    return Vector2(
+      (x * 100).toDouble(),
+      (y * 100).toDouble(),
+    );
   }
 
 
