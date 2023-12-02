@@ -1,9 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
-import 'package:warioddly/shared/others/constants/portfolio.dart';
 import 'package:warioddly/shared/worlds/dungeon.dart';
-import 'package:warioddly/game_manual_controller.dart';
 import 'package:warioddly/shared/player/wizard_interface.dart';
 import 'package:warioddly/shared/player/wizard.dart';
 import 'package:flutter/services.dart';
@@ -57,8 +55,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        debugMode: false,
-        player: Wizard(Vector2((4 * Dungeon.tileSize), (6 * Dungeon.tileSize))),
+        debugMode: true,
+        player: Wizard(Vector2(2000, 1350)),
         interface: KnightInterface(),
         components: [
           ...Dungeon.enemies(),
@@ -69,24 +67,48 @@ class _HomePageState extends State<HomePage> {
           zoom: getZoomFromMaxVisibleTile(context, Dungeon.tileSize, 20),
           speed: 1.5,
         ),
-        // map: WorldMapByTiled(
-        //   'images/tiled/mapa$map.json',
-        //   forceTileSize: Vector2(DungeonMap.tileSize, DungeonMap.tileSize),
-        //   objectsBuilder: {
-        //     'goblin': (properties) => Goblin(properties.position),
-        //     'torch': (properties) => Torch(properties.position),
-        //     'barrel': (properties) => BarrelDraggable(properties.position),
-        //     'spike': (properties) => Spikes(properties.position),
-        //     'column': (properties) => ColumnDecoration(properties.position),
-        //     'chest': (properties) => Chest(properties.position),
-        //     'critter': (properties) => Critter(properties.position),
-        //     'wizard': (properties) => Wizard(properties.position),
-        //   },
-        // ),
+        map: WorldMapByTiled(
+          'dungeon.tmj',
+          forceTileSize: Vector2.all(16),
+          objectsBuilder: {
+            'object': (TiledObjectProperties properties) {
+              print(1111);
+              return RecHItbox(
+                position: properties.position,
+                size: properties.size,
+              );
+            },
+            'laaa': (TiledObjectProperties properties) {
+              print(2222);
+              return RecHItbox(
+                position: properties.position,
+                size: properties.size,
+              );
+            }
+          },
+        ),
         backgroundColor: Colors.blueGrey[900]!,
         lightingColorGame: Colors.black.withOpacity(0.75),
       )
     );
   }
+
+}
+
+
+class RecHItbox extends GameDecoration {
+
+  RecHItbox({required super.position, required super.size});
+
+
+  @override
+  Future<void> onLoad() {
+    add(RectangleHitbox(
+      position: super.position,
+      size: super.size,
+    ));
+    return super.onLoad();
+  }
+
 
 }

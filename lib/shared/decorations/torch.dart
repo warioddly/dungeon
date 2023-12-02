@@ -14,8 +14,7 @@ class Torch extends GameDecoration {
             blurBorder: Dungeon.tileSize,
             color: Colors.deepOrangeAccent.withOpacity(0.3),
             withPulse: true,
-            align: Vector2(
-                -Dungeon.tileSize * 0.25, -Dungeon.tileSize * 0.3),
+            align: Vector2(-Dungeon.tileSize * 0.25, -Dungeon.tileSize * 0.3),
           ),
         );
 }
