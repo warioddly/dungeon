@@ -1,32 +1,32 @@
 {
-    "name": "warioddly",
-    "short_name": "warioddly",
+    "name": "Warioddly Portfolio",
+    "short_name": "Warioddly",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
+    "background_color": "#00111c",
+    "theme_color": "##00111c",
     "description": "Hey! This is my portfolio...",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "Icon.jpeg",
+            "src": "icon.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "Icon.jpeg",
+            "src": "icon.png",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "Icon.jpeg",
+            "src": "icon.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "Icon.jpeg",
+            "src": "icon.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
