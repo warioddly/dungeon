@@ -1,10 +1,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
+import 'package:warioddly/shared/decorations/crystal/blue_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/dark_red_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/green_crystal.dart';
+import 'package:warioddly/shared/decorations/crystal/pink_crystal.dart';
+import 'package:warioddly/shared/decorations/social_web_box/github_box.dart';
+import 'package:warioddly/shared/decorations/social_web_box/instagram_box.dart';
+import 'package:warioddly/shared/decorations/social_web_box/io_box.dart';
+import 'package:warioddly/shared/decorations/social_web_box/leetcode_box.dart';
+import 'package:warioddly/shared/decorations/social_web_box/linkedin_box.dart';
+import 'package:warioddly/shared/npc/ghost.dart';
+import 'package:warioddly/shared/others/models/portfolio_model.dart';
 import 'package:warioddly/shared/worlds/dungeon.dart';
-import 'package:warioddly/shared/player/wizard_interface.dart';
+import 'package:warioddly/shared/player/player_interface.dart';
 import 'package:warioddly/shared/player/wizard.dart';
 import 'package:flutter/services.dart';
+
+import 'shared/decorations/social_web_box/hackerrank_box.dart';
 
 
 void main() async {
@@ -57,12 +70,12 @@ class _HomePageState extends State<HomePage> {
         ),
         debugMode: false,
         player: Wizard(Vector2(2000, 1350)),
-        interface: KnightInterface(),
-        components: [
-          ...Dungeon.enemies(),
-          ...Dungeon.decorations(),
-          // GameManualController(),
-        ],
+        interface: PlayerInterface(),
+        // components: [
+        //   // ...Dungeon.enemies(),
+        //   // ...Dungeon.decorations(),
+        //   // GameManualController(),
+        // ],
         cameraConfig: CameraConfig(
           zoom: getZoomFromMaxVisibleTile(context, Dungeon.tileSize, 20),
           speed: 1.5,
@@ -70,20 +83,7 @@ class _HomePageState extends State<HomePage> {
         map: WorldMapByTiled(
           'dungeon.tmj',
           forceTileSize: Vector2.all(16),
-          objectsBuilder: {
-            'object': (TiledObjectProperties properties) {
-              return RecHItbox(
-                position: properties.position,
-                size: properties.size,
-              );
-            },
-            'laaa': (TiledObjectProperties properties) {
-              return RecHItbox(
-                position: properties.position,
-                size: properties.size,
-              );
-            }
-          },
+          objectsBuilder: objectBuilder(),
         ),
         backgroundColor: Colors.blueGrey[900]!,
         lightingColorGame: Colors.black.withOpacity(0.75),
@@ -91,22 +91,102 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-}
 
 
-class RecHItbox extends GameDecoration {
+  Map<String, GameComponent Function(TiledObjectProperties)> objectBuilder() {
+    return {
+      'ghost': (TiledObjectProperties properties) {
+        return Ghost(properties.position);
+      },
 
-  RecHItbox({required super.position, required super.size});
+      'blue_crystal': (TiledObjectProperties properties) {
+        return BlueCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'dark_red_crystal': (TiledObjectProperties properties) {
+        return DarkRedCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'green_crystal': (TiledObjectProperties properties) {
+        return GreenCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'pink_crystal': (TiledObjectProperties properties) {
+        return PinkCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'red_crystal': (TiledObjectProperties properties) {
+        return PinkCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'violet_crystal': (TiledObjectProperties properties) {
+        return PinkCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'yellow_crystal': (TiledObjectProperties properties) {
+        return PinkCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'yellow_green_crystal': (TiledObjectProperties properties) {
+        return PinkCrystal(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
 
-
-  @override
-  Future<void> onLoad() {
-    add(RectangleHitbox(
-      position: super.position,
-      size: super.size,
-    ));
-    return super.onLoad();
+      'leetcode': (TiledObjectProperties properties) {
+        return LeetCodeBox(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'instagram': (TiledObjectProperties properties) {
+        return InstagramBox(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'linkedin': (TiledObjectProperties properties) {
+        return LinkedInBox(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'hackerrank': (TiledObjectProperties properties) {
+        return HackerRankBox(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'github': (TiledObjectProperties properties) {
+        return GithubBox(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+      'io': (TiledObjectProperties properties) {
+        return IoBox(
+          position: properties.position,
+          project: ProjectModel.fromJson(properties.others),
+        );
+      },
+    };
   }
 
 
 }
+
