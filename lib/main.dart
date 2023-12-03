@@ -13,7 +13,7 @@ import 'package:warioddly/shared/decorations/social_web_box/linkedin_box.dart';
 import 'package:warioddly/shared/npc/ghost.dart';
 import 'package:warioddly/shared/others/models/portfolio_model.dart';
 import 'package:warioddly/shared/worlds/dungeon.dart';
-import 'package:warioddly/shared/player/wizard_interface.dart';
+import 'package:warioddly/shared/player/player_interface.dart';
 import 'package:warioddly/shared/player/wizard.dart';
 import 'package:flutter/services.dart';
 
@@ -68,9 +68,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        debugMode: true,
+        debugMode: false,
         player: Wizard(Vector2(2000, 1350)),
-        interface: KnightInterface(),
+        interface: PlayerInterface(),
         // components: [
         //   // ...Dungeon.enemies(),
         //   // ...Dungeon.decorations(),

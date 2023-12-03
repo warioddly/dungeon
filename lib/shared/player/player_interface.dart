@@ -4,7 +4,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:warioddly/shared/npc/goblin.dart';
 import 'package:flutter/material.dart';
 
-class KnightInterface extends GameInterface {
+class PlayerInterface extends GameInterface {
 
   static const followerWidgetTestId = 'BUTTON';
 
