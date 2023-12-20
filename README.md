@@ -1,6 +1,6 @@
 # warioddly
 
-Hey! This is my portfolio...
+Hey! This is dungeon world...
 
 ## Getting Started
 
