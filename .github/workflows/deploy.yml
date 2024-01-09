@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Deploy Portfolio
+name: Deploy 
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   dependencies:
-    name: Build Portfolio
+    name: Build 
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.TOKEN }}
